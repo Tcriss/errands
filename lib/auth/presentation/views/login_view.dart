@@ -1,0 +1,40 @@
+import 'package:errands/auth/presentation/widgets/login_form.dart';
+import 'package:errands/core/presentation/widgets/widgets.dart';
+import 'package:flutter/material.dart';
+
+class LoginView extends StatelessWidget {
+  const LoginView({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          spacing: 10,
+          children: [
+            const SizedBox(
+              height: 200,
+              child: Center(
+                child: Text(
+                  'Login',
+                  style: TextStyle(fontSize: 40.0, fontWeight: FontWeight.bold),
+                ),
+              ),
+            ),
+            LoginForm(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              spacing: 5.0,
+              children: [
+                const Text("Don't have an account?"),
+                CustomTextButton(label: 'Create an account', fontWeight: FontWeight.bold, onPress: () {}),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
