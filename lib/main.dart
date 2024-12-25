@@ -1,15 +1,23 @@
-import 'package:errands/auth/presentation/views/login_view.dart';
-import 'package:errands/core/application/env.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart' show kDebugMode;
 import 'package:supabase_flutter/supabase_flutter.dart';
+
+import 'package:errands/core/app/env.dart';
+import 'package:errands/core/services/service_locator.dart';
+import 'package:errands/auth/presentation/views/views.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   await Supabase.initialize(
     url: Env.sbUrl,
-    anonKey: Env.sbAnnonKey
+    anonKey: Env.sbAnnonKey,
+    realtimeClientOptions: const RealtimeClientOptions(
+      logLevel: kDebugMode ? RealtimeLogLevel.debug : RealtimeLogLevel.info,
+    ),
   );
-  
+  await setupServiceLocator();
+
   runApp(const MainApp());
 }
 
@@ -21,7 +29,10 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
       title: 'Errands',
       debugShowCheckedModeBanner: false,
-      home: SafeArea(child: const LoginView()),
+      routes: {
+        '/': (context) => const LoginView(),
+        '/sing-up': (context) => const SingupView(),
+      },
     );
   }
 }
