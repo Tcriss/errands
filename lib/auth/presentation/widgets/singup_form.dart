@@ -1,14 +1,14 @@
 import 'package:errands/core/common/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
-class LoginForm extends StatefulWidget {
-  const LoginForm({super.key});
+class SingupForm extends StatefulWidget {
+  const SingupForm({super.key});
 
   @override
-  State<LoginForm> createState() => _LoginFormState();
+  State<SingupForm> createState() => _SingupFormState();
 }
 
-class _LoginFormState extends State<LoginForm> {
+class _SingupFormState extends State<SingupForm> {
   @override
   Widget build(BuildContext context) {
     void login(String text) => print(text);
@@ -29,6 +29,12 @@ class _LoginFormState extends State<LoginForm> {
           CustomInput(
             onValue: login,
             label: 'Password',
+            placeHolder: 'Tap to write',
+            preffixIcon: const Icon(Icons.key_outlined, color: Colors.black38),
+          ),
+          CustomInput(
+            onValue: login,
+            label: 'Confirm password',
             placeHolder: 'Tap to write',
             preffixIcon: const Icon(Icons.key_outlined, color: Colors.black38),
           ),

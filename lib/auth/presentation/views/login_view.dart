@@ -1,5 +1,5 @@
 import 'package:errands/auth/presentation/widgets/login_form.dart';
-import 'package:errands/core/presentation/widgets/widgets.dart';
+import 'package:errands/core/common/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
 class LoginView extends StatelessWidget {
@@ -23,13 +23,17 @@ class LoginView extends StatelessWidget {
                 ),
               ),
             ),
-            LoginForm(),
+            const LoginForm(),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               spacing: 5.0,
               children: [
                 const Text("Don't have an account?"),
-                CustomTextButton(label: 'Create an account', fontWeight: FontWeight.bold, onPress: () {}),
+                CustomTextButton(
+                  label: 'Create an account',
+                  fontWeight: FontWeight.bold,
+                  onPress: () => Navigator.pushNamed(context, '/sing-up')
+                ),
               ],
             ),
           ],
