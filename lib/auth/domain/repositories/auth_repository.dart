@@ -1,18 +1,22 @@
+
+import 'package:errands/auth/domain/entities/user.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 abstract interface class AuthRepository {
-  Future<User> signUpWithEmailPassword({
+  Future<UserEntity> signUpWithEmailPassword({
     required String name,
     required String email,
     required String password,
   });
 
-  Future<User> loginWithEmailPassword({
+  Future<UserEntity> loginWithEmailPassword({
     required String email,
     required String password,
   });
 
-  Future<Session> currentSession();
+  Future<Session?> currentSession();
 
-  Future<User> currentUser();
+  Future<UserEntity?> currentUser();
+
+  Future<void> logOut();
 }
