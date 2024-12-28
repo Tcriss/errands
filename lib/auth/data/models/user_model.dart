@@ -35,10 +35,10 @@ class UserModel {
     'picture': picture,
   };
 
-  UserEntity toEntity() => (
+  UserEntity toEntity() => UserEntity(
     id: id,
     name: name,
     email: email,
     picture: picture
-  ) as UserEntity;
+  );
 }
