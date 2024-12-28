@@ -1,41 +1,79 @@
-import 'package:errands/auth/data/data_sources/remote_data_source.dart';
+import 'package:errands/auth/domain/data_sources/auth_data_source.dart';
 import 'package:errands/auth/domain/entities/user.dart';
 import 'package:errands/auth/domain/repositories/auth_repository.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class SupabaseAuthRepository implements AuthRepository {
-  final RemoteDataSource _source;
+  final AuthDataSource _dataSource;
 
-  SupabaseAuthRepository(this._source);
+  SupabaseAuthRepository(this._dataSource);
 
   @override
   Future<UserEntity> loginWithEmailPassword({
     required String email,
     required String password,
-  }) async =>
-      _source.loginWithEmailPassword(email: email, password: password)
-          as UserEntity;
+  }) async {
+    try {
+      return _dataSource.loginWithEmailPassword(
+        email: email,
+        password: password,
+      );
+    } on AuthException catch (e) {
+      throw AuthException(e.message);
+    } catch (e) {
+      throw AuthException('An unexpected error occurred. $e');
+    }
+  }
 
   @override
   Future<UserEntity> signUpWithEmailPassword({
     required String name,
     required String email,
     required String password,
-  }) async =>
-      _source.signUpWithEmailPassword(
-            name: name,
-            email: email,
-            password: password,
-          )
-          as UserEntity;
+  }) async {
+    try {
+      return _dataSource.signUpWithEmailPassword(
+        name: name,
+        email: email,
+        password: password,
+      );
+    } on AuthException catch (e) {
+      throw AuthException(e.message);
+    } catch (e) {
+      throw AuthException('An unexpected error occurred. $e');
+    }
+  }
 
   @override
-  Future<Session?> currentSession() async => _source.currentSession();
+  Future<Session?> currentSession() async {
+    try {
+      return _dataSource.currentSession();
+    } on AuthException catch (e) {
+      throw AuthException(e.message);
+    } catch (e) {
+      throw AuthException('An unexpected error occurred. $e');
+    }
+  }
 
   @override
-  Future<UserEntity?> currentUser() async =>
-      _source.currentUser() as UserEntity;
+  Future<UserEntity?> currentUser() async {
+    try {
+      return _dataSource.currentUser();
+    } on AuthException catch (e) {
+      throw AuthException(e.message);
+    } catch (e) {
+      throw AuthException('An unexpected error occurred. $e');
+    }
+  }
 
   @override
-  Future<void> logOut() async => _source.logOut();
+  Future<void> logOut() async {
+    try {
+      await _dataSource.logOut();
+    } on AuthException catch (e) {
+      throw AuthException(e.message);
+    } catch (e) {
+      throw AuthException('An unexpected error occurred. $e');
+    }
+  }
 }
