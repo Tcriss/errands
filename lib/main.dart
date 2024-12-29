@@ -1,14 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter/foundation.dart' show kDebugMode;
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-Future<void> main() async {
-  await dotenv.load(fileName: ".env");
+import 'package:errands/core/app/env.dart';
+import 'package:errands/core/services/service_locator.dart';
+import 'package:errands/auth/presentation/views/views.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
   await Supabase.initialize(
-    url: dotenv.get('SB_KEY'),
-    anonKey: dotenv.get('SB_ANNON_KEY')
+    url: Env.sbUrl,
+    anonKey: Env.sbAnnonKey,
+    realtimeClientOptions: const RealtimeClientOptions(
+      logLevel: kDebugMode ? RealtimeLogLevel.debug : RealtimeLogLevel.info,
+    ),
   );
-  
+  await setupServiceLocator();
+
   runApp(const MainApp());
 }
 
@@ -17,8 +26,13 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(body: Center(child: Text('Hello World!'))),
+    return MaterialApp(
+      title: 'Errands',
+      debugShowCheckedModeBanner: false,
+      routes: {
+        '/': (context) => const LoginView(),
+        '/sing-up': (context) => const SingupView(),
+      },
     );
   }
 }

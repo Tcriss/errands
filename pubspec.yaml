@@ -9,7 +9,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_dotenv: ^5.2.1
+  get_it: ^8.0.3
   supabase_flutter: ^2.8.2
 
 dev_dependencies:
