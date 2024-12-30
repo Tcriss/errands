@@ -4,7 +4,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 
 import 'package:errands/core/app/env.dart';
 import 'package:errands/core/services/service_locator.dart';
-import 'package:errands/auth/presentation/views/views.dart';
+import 'package:errands/features/auth/presentation/views/views.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
