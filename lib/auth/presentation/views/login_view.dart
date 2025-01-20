@@ -1,4 +1,4 @@
-import 'package:errands/features/auth/presentation/widgets/login_form.dart';
+import 'package:errands/auth/presentation/widgets/login_form.dart';
 import 'package:errands/core/common/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 

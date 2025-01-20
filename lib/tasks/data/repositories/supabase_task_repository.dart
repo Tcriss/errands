@@ -1,6 +1,6 @@
-import 'package:errands/features/tasks/domain/data_sources/task_data_source.dart';
-import 'package:errands/features/tasks/domain/entities/task.dart';
-import 'package:errands/features/tasks/domain/repository/task_repository.dart';
+import 'package:errands/tasks/domain/data_sources/task_data_source.dart';
+import 'package:errands/tasks/domain/entities/task.dart';
+import 'package:errands/tasks/domain/repository/task_repository.dart';
 
 class SupabaseTaskRepository implements TaskRepository {
   final TaskDataSource _dataSource;

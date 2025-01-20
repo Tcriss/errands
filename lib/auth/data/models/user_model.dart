@@ -1,4 +1,4 @@
-import 'package:errands/features/auth/domain/entities/user.dart';
+import 'package:errands/auth/domain/entities/user.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class UserModel {

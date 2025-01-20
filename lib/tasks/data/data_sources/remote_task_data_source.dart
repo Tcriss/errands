@@ -1,6 +1,6 @@
-import 'package:errands/features/tasks/data/models/task_model.dart';
-import 'package:errands/features/tasks/domain/data_sources/task_data_source.dart';
-import 'package:errands/features/tasks/domain/entities/task.dart';
+import 'package:errands/tasks/data/models/task_model.dart';
+import 'package:errands/tasks/domain/data_sources/task_data_source.dart';
+import 'package:errands/tasks/domain/entities/task.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class RemoteTaskDataSource implements TaskDataSource {

@@ -1,6 +1,6 @@
-import 'package:errands/features/auth/data/models/user_model.dart';
-import 'package:errands/features/auth/domain/data_sources/auth_data_source.dart';
-import 'package:errands/features/auth/domain/entities/user.dart';
+import 'package:errands/auth/data/models/user_model.dart';
+import 'package:errands/auth/domain/data_sources/auth_data_source.dart';
+import 'package:errands/auth/domain/entities/user.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class RemoteDataSource implements AuthDataSource {

@@ -1,4 +1,4 @@
-import 'package:errands/features/auth/domain/repositories/auth_repository.dart';
+import 'package:errands/auth/domain/repositories/auth_repository.dart';
 import 'package:errands/core/common/widgets/widgets.dart';
 import 'package:errands/core/services/service_locator.dart';
 import 'package:flutter/material.dart';

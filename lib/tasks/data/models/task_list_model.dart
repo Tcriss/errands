@@ -1,5 +1,5 @@
-import 'package:errands/features/tasks/domain/entities/task.dart';
-import 'package:errands/features/tasks/domain/entities/task_list.dart';
+import 'package:errands/tasks/domain/entities/task.dart';
+import 'package:errands/tasks/domain/entities/task_list.dart';
 
 class TaskListModel {
   final String id;

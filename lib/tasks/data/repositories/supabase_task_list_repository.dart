@@ -1,8 +1,8 @@
-import 'package:errands/features/auth/domain/entities/user.dart';
-import 'package:errands/features/auth/domain/repositories/auth_repository.dart';
-import 'package:errands/features/tasks/domain/data_sources/task_list_data_source.dart';
-import 'package:errands/features/tasks/domain/entities/task_list.dart';
-import 'package:errands/features/tasks/domain/repository/task_list_repository.dart';
+import 'package:errands/auth/domain/entities/user.dart';
+import 'package:errands/auth/domain/repositories/auth_repository.dart';
+import 'package:errands/tasks/domain/data_sources/task_list_data_source.dart';
+import 'package:errands/tasks/domain/entities/task_list.dart';
+import 'package:errands/tasks/domain/repository/task_list_repository.dart';
 
 class SupabaseTaskListRepository implements TaskListRepository {
   final TaskListDataSource _dataSource;
