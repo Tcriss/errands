@@ -27,6 +27,5 @@ class TaskCard extends StatelessWidget {
       controlAffinity: ListTileControlAffinity.leading,
       onChanged: (bool? value) {},
     );
-    ;
   }
 }

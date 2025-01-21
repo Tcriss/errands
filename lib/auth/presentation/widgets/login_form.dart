@@ -33,13 +33,13 @@ class _LoginFormState extends State<LoginForm> {
           email: _emailController.value.text,
           password: _passwordController.value.text,
         );
-        ScaffoldMessenger.of(context).showSnackBar(snackBar('User: $res'));
+        if (context.mounted) ScaffoldMessenger.of(context).showSnackBar(snackBar('User: $res'));
       } on AuthException catch (e) {
         setState(() => _isLoading = false);
-        ScaffoldMessenger.of(context).showSnackBar(snackBar(e.message));
+        if (context.mounted) ScaffoldMessenger.of(context).showSnackBar(snackBar(e.message));
       } catch (e) {
         setState(() => _isLoading = false);
-        ScaffoldMessenger.of(context).showSnackBar(snackBar('$e'));
+        if (context.mounted) ScaffoldMessenger.of(context).showSnackBar(snackBar('$e'));
       }
     }
 

@@ -44,15 +44,17 @@ class _SingupFormState extends State<SingupForm> {
           email: _emailController.value.text,
           password: _passwordController.value.text,
         );
-        ScaffoldMessenger.of(context).showSnackBar(snackBar('User: $res'));
+        if (context.mounted) ScaffoldMessenger.of(context).showSnackBar(snackBar('User: $res'));
       } on AuthException catch (e) {
         setState(() => _isLoading = false);
-        ScaffoldMessenger.of(context).showSnackBar(snackBar(e.message));
+        if (context.mounted) ScaffoldMessenger.of(context).showSnackBar(snackBar(e.message));
       } catch (e) {
         setState(() => _isLoading = false);
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(snackBar('An unexpected error has ocurred'));
+        if (context.mounted) {
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(snackBar('An unexpected error has ocurred'));
+        }
       }
     }
 

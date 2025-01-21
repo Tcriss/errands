@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:errands/tasks/domain/entities/task.dart';
 import 'package:flutter/material.dart';
 import 'package:errands/tasks/domain/entities/task_list.dart';
@@ -51,10 +53,15 @@ class TaskProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void addTask(TaskEntity task) {
-    final index = _taskLists.indexWhere((list) => list.id == task.listId);
+  void addTask({
+    required String title,
+    required String description,
+    required DateTime date,
+    required String listId
+  }) {
+    final index = _taskLists.indexWhere((list) => list.id == listId);
     if (index != -1) {
-      _taskLists[index].tasks.add(task);
+      _taskLists[index].tasks.add(TaskEntity(id: _generateUniqueId(), title: title, listId: listId));
       notifyListeners();
     }
   }
@@ -72,5 +79,13 @@ class TaskProvider with ChangeNotifier {
     // }
     // TODO: implement removeTask
     throw UnimplementedError();
+  }
+
+  //TODO: remove this method
+  String _generateUniqueId() {
+    final random = Random();
+    final timestamp = DateTime.now().millisecondsSinceEpoch; // Current timestamp
+    final randomPart = random.nextInt(1000000); // Random number up to 999,999
+    return '$timestamp$randomPart';
   }
 }

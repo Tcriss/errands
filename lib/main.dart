@@ -1,6 +1,6 @@
 import 'package:errands/core/app/theme.dart';
-import 'package:errands/tasks/presentation/providers/task-provider.dart';
-import 'package:errands/tasks/presentation/views/task-list-view.dart';
+import 'package:errands/tasks/presentation/providers/task_provider.dart';
+import 'package:errands/tasks/presentation/views/task_list_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart' show kDebugMode;
 import 'package:provider/provider.dart';

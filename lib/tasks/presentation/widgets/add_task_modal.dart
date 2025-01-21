@@ -1,41 +1,27 @@
-import 'dart:math';
-
 import 'package:errands/core/common/widgets/custom_input.dart';
-import 'package:errands/tasks/domain/entities/task.dart';
-import 'package:errands/tasks/presentation/providers/task-provider.dart';
-import 'package:errands/tasks/presentation/widgets/task-list-tile.dart';
+import 'package:errands/tasks/presentation/providers/task_provider.dart';
 import 'package:flutter/material.dart';
 
-class TaskListView extends StatelessWidget {
-  final _taskProvider = TaskProvider();
-
-  TaskListView({super.key});
+class AddTaskModal extends StatefulWidget {
+  const AddTaskModal({super.key});
 
   @override
+  State<AddTaskModal> createState() => _AddTaskModalState();
+}
+
+class _AddTaskModalState extends State<AddTaskModal> {
+  final _taskProvider = TaskProvider();
+  
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Hello'),
-        centerTitle: false,
-      ),
-      body: ListView.builder(
-          padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 0),
-          itemCount: _taskProvider.lists.length,
-          itemBuilder: (_, index) => Column(
-                children: [
-                  TaksListTile(list: _taskProvider.lists[index]),
-                  SizedBox(height: 10.0),
-                ],
-              )),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () => _addTask(context),
+    return FloatingActionButton.extended(
+        onPressed: () => show(context),
         label: const Text('Add Task'),
         icon: const Icon(Icons.add),
-      ),
     );
   }
 
-  void _addTask(BuildContext context) {
+  void show(BuildContext context) {
     final titleController = TextEditingController();
     final descController = TextEditingController();
     String listId = '';
@@ -73,7 +59,9 @@ class TaskListView extends StatelessWidget {
                   ),
                   const Spacer(),
                   PopupMenuButton(
-                    onSelected: (value) => listId = value,
+                    onSelected: (String value) => setState(() {
+                      listId = value;
+                    }),
                     borderRadius: BorderRadius.circular(12.0),
                     position: PopupMenuPosition.over,
                     icon: const Icon(Icons.menu),
@@ -111,13 +99,14 @@ class TaskListView extends StatelessWidget {
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14.0),
                 ),
                 onPressed: () {
-                  _taskProvider.addTask(TaskEntity(
-                    id: _generateUniqueId(),
-                    title: titleController.text,
-                    description: descController.text,
-                    date: DateTime.now(),
-                    listId: '',
-                  ));
+                  setState(() {
+                    _taskProvider.addTask(
+                      title: titleController.text,
+                      description: descController.text,
+                      date: DateTime.now(),
+                      listId: listId,
+                    );
+                  });
                   Navigator.pop(context);
                 },
               )
@@ -126,13 +115,5 @@ class TaskListView extends StatelessWidget {
         );
       },
     );
-  }
-
-  //TODO: remove this method
-  String _generateUniqueId() {
-    final random = Random();
-    final timestamp = DateTime.now().millisecondsSinceEpoch; // Current timestamp
-    final randomPart = random.nextInt(1000000); // Random number up to 999,999
-    return '$timestamp$randomPart';
   }
 }

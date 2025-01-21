@@ -1,7 +1,5 @@
-import 'dart:ui';
-
 import 'package:errands/tasks/domain/entities/task_list.dart';
-import 'package:errands/tasks/presentation/widgets/task-card.dart';
+import 'package:errands/tasks/presentation/widgets/task_card.dart';
 import 'package:flutter/material.dart';
 
 class TaksListTile extends StatelessWidget {
