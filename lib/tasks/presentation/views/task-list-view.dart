@@ -24,6 +24,11 @@ class TaskListView extends StatelessWidget {
               ],
             )
       ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {},
+        label: const Text('Add Task'),
+        icon: const Icon(Icons.add),
+      ),
     );
   }
 }

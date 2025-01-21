@@ -1,3 +1,4 @@
+import 'package:errands/core/app/theme.dart';
 import 'package:errands/tasks/presentation/providers/task-provider.dart';
 import 'package:errands/tasks/presentation/views/task-list-view.dart';
 import 'package:flutter/material.dart';
@@ -34,6 +35,7 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       color: Colors.white,
+      theme: theme,
       title: 'Errands',
       debugShowCheckedModeBanner: false,
       routes: {
