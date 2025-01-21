@@ -46,26 +46,31 @@ class TaskProvider with ChangeNotifier {
 
   List<TaskListEntity> get lists => _taskLists;
 
-  void addTaskList(TaskListEntity taskList) {
+  void createList(TaskListEntity taskList) {
     _taskLists.add(taskList);
     notifyListeners();
   }
 
-  void removeTaskList(TaskListEntity taskList) {
-    _taskLists.remove(taskList);
-    notifyListeners();
-  }
-
-  void updateTaskList(TaskListEntity taskList) {
-    final index = _taskLists.indexWhere((element) => element.id == taskList.id);
+  void addTask(TaskEntity task) {
+    final index = _taskLists.indexWhere((list) => list.id == task.listId);
     if (index != -1) {
-      _taskLists[index] = taskList;
+      _taskLists[index].tasks.add(task);
       notifyListeners();
     }
   }
 
-  void clearTaskLists() {
-    _taskLists.clear();
-    notifyListeners();
+  void removeTask(TaskListEntity taskList) {
+    // TODO: implement removeTask
+    throw UnimplementedError();
+  }
+
+  void updateTask(TaskListEntity taskList) {
+    // final index = _taskLists.indexWhere((element) => element.id == taskList.id);
+    // if (index != -1) {
+    //   _taskLists[index] = taskList;
+    //   notifyListeners();
+    // }
+    // TODO: implement removeTask
+    throw UnimplementedError();
   }
 }

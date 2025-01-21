@@ -6,7 +6,7 @@ class CustomInput extends StatelessWidget {
   final Widget? _suffixIcon;
   final Widget? _preffixIcon;
   final Function(PointerDownEvent)? _onTapOutside;
-  final String _label;
+  final String? _label;
   final TextEditingController? _controller;
   final FocusNode? _focus;
   final FormFieldValidator<String>? validator;
@@ -17,7 +17,7 @@ class CustomInput extends StatelessWidget {
     String? placeHolder = 'Tap to write',
     Widget? suffixIcon,
     Widget? preffixIcon,
-    required String label,
+    String? label,
     Function(PointerDownEvent)? onTapOutside,
     FocusNode? focus,
     TextEditingController? controller,
@@ -35,12 +35,13 @@ class CustomInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final InputDecoration inputDecoration = InputDecoration(
-      filled: true,
+      filled: false,
       hintText: _placeHolder,
       prefixIcon: _preffixIcon,
       suffixIcon: _suffixIcon,
-      border: const OutlineInputBorder(
-        borderRadius: BorderRadius.all(Radius.circular(14.0)),
+      border: OutlineInputBorder(
+        borderSide: BorderSide(color: Colors.blue.shade200, width: 2.0),
+        borderRadius: const BorderRadius.all(Radius.circular(14.0)),
       ),
       alignLabelWithHint: true,
       labelText: _label,

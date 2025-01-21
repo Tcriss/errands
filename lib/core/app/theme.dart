@@ -10,5 +10,11 @@ final theme = ThemeData(
   buttonTheme: ButtonThemeData(
     colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
     buttonColor: Colors.blue  
+  ),
+  popupMenuTheme: PopupMenuThemeData(
+    color: Colors.grey.shade200,
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(12.0),
+    ),
   )
 );
