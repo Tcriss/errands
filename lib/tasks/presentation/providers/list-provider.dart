@@ -12,7 +12,7 @@ class TaskListProvider with ChangeNotifier {
         TaskEntity(
           id: '1',
           title: 'Task 1',
-          description: 'Description',
+          description: 'Description Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim aeque doleamus animo, cum corpore dolemus, fieri tamen permagna accessio potest, si aliquod aeternum et infinitum impendere malum nobis opinemur. Quod idem licet transferre in voluptatem, ut postea variari voluptas distinguique possit, augeri amplificarique non.',
           date: DateTime.now(),
           listId: '1',
           completed: false,
@@ -23,7 +23,7 @@ class TaskListProvider with ChangeNotifier {
           description: 'Description',
           date: DateTime.now(),
           listId: '1',
-          completed: false,
+          completed: true,
         )
       ]
     ),
