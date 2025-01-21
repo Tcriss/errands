@@ -1,5 +1,8 @@
+import 'package:errands/tasks/presentation/providers/list-provider.dart';
+import 'package:errands/tasks/presentation/views/task-list-view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart' show kDebugMode;
+import 'package:provider/provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import 'package:errands/core/app/env.dart';
@@ -17,6 +20,9 @@ void main() async {
     ),
   );
   await setupServiceLocator();
+  MultiProvider(providers: [
+    ChangeNotifierProvider(create: (_) => TaskListProvider())
+  ]);
 
   runApp(const MainApp());
 }
@@ -27,10 +33,12 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      color: Colors.white,
       title: 'Errands',
       debugShowCheckedModeBanner: false,
       routes: {
-        '/': (context) => const LoginView(),
+        '/': (context) => const TaskListView(),
+        '/login': (context) => const LoginView(),
         '/sing-up': (context) => const SingupView(),
       },
     );
