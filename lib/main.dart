@@ -1,4 +1,4 @@
-import 'package:errands/tasks/presentation/providers/list-provider.dart';
+import 'package:errands/tasks/presentation/providers/task-provider.dart';
 import 'package:errands/tasks/presentation/views/task-list-view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart' show kDebugMode;
@@ -21,7 +21,7 @@ void main() async {
   );
   await setupServiceLocator();
   MultiProvider(providers: [
-    ChangeNotifierProvider(create: (_) => TaskListProvider())
+    ChangeNotifierProvider(create: (_) => TaskProvider())
   ]);
 
   runApp(const MainApp());

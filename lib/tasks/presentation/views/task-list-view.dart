@@ -1,4 +1,4 @@
-import 'package:errands/tasks/presentation/providers/list-provider.dart';
+import 'package:errands/tasks/presentation/providers/task-provider.dart';
 import 'package:errands/tasks/presentation/widgets/task-list-tile.dart';
 import 'package:flutter/material.dart';
 
@@ -7,7 +7,7 @@ class TaskListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final taskListProvider = TaskListProvider();
+    final taskProvider = TaskProvider();
 
     return Scaffold(
       appBar: AppBar(
@@ -16,10 +16,10 @@ class TaskListView extends StatelessWidget {
       ),
       body: ListView.builder(
           padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 0),
-            itemCount: taskListProvider.lists.length,
+            itemCount: taskProvider.lists.length,
             itemBuilder: (_, index) => Column(
               children: [
-                TaksListTile(list: taskListProvider.lists[index]),
+                TaksListTile(list: taskProvider.lists[index]),
                 SizedBox(height: 10.0),
               ],
             )
