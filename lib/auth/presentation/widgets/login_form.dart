@@ -33,7 +33,10 @@ class _LoginFormState extends State<LoginForm> {
           email: _emailController.value.text,
           password: _passwordController.value.text,
         );
-        if (context.mounted) ScaffoldMessenger.of(context).showSnackBar(snackBar('User: $res'));
+        if (context.mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(snackBar('User: $res'));
+          Navigator.of(context).pushReplacementNamed('/tasks');
+        }
       } on AuthException catch (e) {
         setState(() => _isLoading = false);
         if (context.mounted) ScaffoldMessenger.of(context).showSnackBar(snackBar(e.message));
