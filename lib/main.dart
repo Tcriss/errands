@@ -1,3 +1,4 @@
+import 'package:errands/auth/presentation/providers/auth-provider.dart';
 import 'package:errands/core/app/theme.dart';
 import 'package:errands/tasks/presentation/providers/task_provider.dart';
 import 'package:errands/tasks/presentation/views/task_list_view.dart';
@@ -22,7 +23,8 @@ void main() async {
   );
   await setupServiceLocator();
   MultiProvider(providers: [
-    ChangeNotifierProvider(create: (_) => TaskProvider())
+    ChangeNotifierProvider(create: (_) => TaskProvider()),
+    ChangeNotifierProvider(create: (_) => AuthProvider())
   ]);
 
   runApp(const MainApp());

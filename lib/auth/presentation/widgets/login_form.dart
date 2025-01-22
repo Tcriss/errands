@@ -1,8 +1,6 @@
-import 'package:errands/auth/domain/repositories/auth_repository.dart';
+import 'package:errands/auth/presentation/providers/auth-provider.dart';
 import 'package:errands/core/common/widgets/widgets.dart';
-import 'package:errands/core/services/service_locator.dart';
 import 'package:flutter/material.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
 class LoginForm extends StatefulWidget {
   const LoginForm({super.key});
@@ -12,13 +10,12 @@ class LoginForm extends StatefulWidget {
 }
 
 class _LoginFormState extends State<LoginForm> {
+  final _authProvider = AuthProvider();
   final _formKey = GlobalKey<FormState>();
-  final _authRepository = locator<AuthRepository>();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final emailFocus = FocusNode();
   final pwFocus = FocusNode();
-  bool _isLoading = false;
 
   String? _validate(String? value) =>
       value == null || value.isEmpty ? 'This fields is required' : null;
@@ -27,23 +24,8 @@ class _LoginFormState extends State<LoginForm> {
   Widget build(BuildContext context) {
     SnackBar snackBar(String label) => SnackBar(content: Text(label));
 
-    Future<void> login() async {
-      try {
-        final res = await _authRepository.loginWithEmailPassword(
-          email: _emailController.value.text,
-          password: _passwordController.value.text,
-        );
-        if (context.mounted) {
-          ScaffoldMessenger.of(context).showSnackBar(snackBar('User: $res'));
-          Navigator.of(context).pushReplacementNamed('/tasks');
-        }
-      } on AuthException catch (e) {
-        setState(() => _isLoading = false);
-        if (context.mounted) ScaffoldMessenger.of(context).showSnackBar(snackBar(e.message));
-      } catch (e) {
-        setState(() => _isLoading = false);
-        if (context.mounted) ScaffoldMessenger.of(context).showSnackBar(snackBar('$e'));
-      }
+    Future<void> login(String email, String password) async {
+      await _authProvider.login(email, password, context);
     }
 
     return Form(
@@ -90,9 +72,11 @@ class _LoginFormState extends State<LoginForm> {
             width: double.infinity,
             child: CustomFilledButton(
               label: 'Login',
-              isLoading: _isLoading,
+              isLoading: _authProvider.isloading,
               onPress: () {
-                if (_formKey.currentState!.validate()) login();
+                if (_formKey.currentState!.validate()) {
+                  login(_emailController.text, _passwordController.text);
+                }
               },
             ),
           ),
