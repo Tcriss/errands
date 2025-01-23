@@ -34,6 +34,7 @@ class LoginView extends StatelessWidget {
                           ),
                         ),
                       ),
+                      //Spacer(),
                       const LoginForm(),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,

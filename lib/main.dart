@@ -41,8 +41,8 @@ class MainApp extends StatelessWidget {
       title: 'Errands',
       debugShowCheckedModeBanner: false,
       routes: {
-        '/tasks': (context) => TaskListView(),
-        '/': (context) => const LoginView(),
+        '/': (context) => TaskListView(),
+        '/login': (context) => const LoginView(),
         '/sing-up': (context) => const SingupView(),
       },
     );

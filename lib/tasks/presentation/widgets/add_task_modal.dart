@@ -15,13 +15,13 @@ class _AddTaskModalState extends State<AddTaskModal> {
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton.extended(
-        onPressed: () => show(context),
+        onPressed: () => _show(context),
         label: const Text('Add Task'),
         icon: const Icon(Icons.add),
     );
   }
 
-  void show(BuildContext context) {
+  void _show(BuildContext context) {
     final titleController = TextEditingController();
     final descController = TextEditingController();
     String listId = '';

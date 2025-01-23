@@ -15,31 +15,37 @@ class AuthProvider extends ChangeNotifier {
 
   Future<void> fetchUser(BuildContext context) async {
     try {
-      _user = await _authRepository.currentUser()!;
+      _isLoading = true;
       notifyListeners();
+
+      _user = await _authRepository.currentUser()!;
     } on AuthException catch (err) {
       if (context.mounted) {
-        ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(content: Text(err.message)));
-        Navigator.of(context).pushNamed('/login');
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(err.message)));
+        Navigator.of(context).pushReplacementNamed('/login');
       }
     } catch (err) {
-      if (context.mounted) ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('$err')));
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('$err')));
+        Navigator.of(context).pushReplacementNamed('/login');
+      }
+    } finally {
+      _isLoading = false;
+      notifyListeners();
     }
   }
 
   Future<void> login(String email, String password, BuildContext context) async {
-    _isLoading = true;
 
     try {
-      final res = await _authRepository.loginWithEmailPassword(email: email, password: password);
+      _isLoading = true;
+      notifyListeners();
+
+      _user = await _authRepository.loginWithEmailPassword(email: email, password: password);
 
       if (context.mounted) {
-        _user = res;
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text(' Welcome: ${res.name}'),
-        ));
-        Navigator.of(context).pushReplacementNamed('/tasks');
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(' Welcome: ${_user!.name}'),));
+        Navigator.of(context).pushReplacementNamed('/');
       }
     } on AuthException catch (e) {
       if (context.mounted) ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(e.message)));
@@ -47,8 +53,26 @@ class AuthProvider extends ChangeNotifier {
       if (context.mounted) ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('$e')));
     } finally {
       _isLoading = false;
+      notifyListeners();
+    }
+  }
+
+  Future<void> logout(BuildContext context) async {
+    try {
+      _isLoading = true;
+      notifyListeners();
+
+      await _authRepository.logOut();
+      _user = null;
+      if (context.mounted) Navigator.of(context).pushReplacementNamed('/login');
+    } on AuthException catch (err) {
+      if (context.mounted) ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(err.message)));
+    } catch (err) {
+      if (context.mounted) ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('$err')));
+    } finally {
+      _isLoading = false;
+      notifyListeners();
     }
 
-    notifyListeners();
   }
 }
